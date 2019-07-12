@@ -19,8 +19,9 @@ class Board
         if piece_location_valid?(coords)
             @board[coords[0]][coords[1]] = piece
             true
+        else
+            false
         end
-        false
     end
 
     # Checking if the piece coordinates are valid or not:
@@ -42,9 +43,9 @@ class Board
 
     def coords_available?(coords)
         if @board[coords[0]][coords[1]].nil?
-            return true
+            true
         else
-          false
+            false
         end
     end
 
@@ -61,7 +62,7 @@ class Board
     end
 
     def winning_vertical?(piece)
-        @board.any? do |vert|
+        verticals.any? do |vert|
             vert.all?{|cell| cell == piece }
         end
     end
@@ -76,6 +77,10 @@ class Board
         [[ @board[0][0],@board[1][1],@board[2][2] ],[ @board[2][0],@board[1][1],@board[0][2] ]]
     end
 
+    def verticals
+        @board
+    end
+
     def horizontals
         horizontals = []
         3.times do |i|
@@ -86,7 +91,7 @@ class Board
 
     def full?
         @board.all? do |row|
-            row.none? {|c| c.nil? }
+            row.none?(&:nil? )
         end
     end
 

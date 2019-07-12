@@ -36,7 +36,6 @@ class Player
             true
         else
             puts "Invalid Coordinates"
-            false
         end
     end
 
