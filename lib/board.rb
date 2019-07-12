@@ -4,6 +4,7 @@ class Board
     end
 
     def render
+        puts
         @board.each do |row|
             row.each do |cell|
                 cell.nil? ? print("-") : print(cell.to_s)
@@ -16,7 +17,7 @@ class Board
     #adding piece
     def add_piece(coords, piece)
         if piece_location_valid?(coords)
-            @board[coords[0]][coords[1]] = peice
+            @board[coords[0]][coords[1]] = piece
             true
         end
         false
@@ -26,22 +27,25 @@ class Board
     def piece_location_valid?(coords)
         if valid_coords?(coords)
             coords_available?(coords)
+        else
+          puts "Piece coordinates are out of bounds!"
         end
-        puts "Piece coordinates are out of bounds!"
     end
 
     def valid_coords?(coords)
         if (0..2).include?(coords[0]) && (0..2).include?(coords[1])
-            true
+          true
+        else
+          false
         end
-        false
     end
 
     def coords_available?(coords)
         if @board[coords[0]][coords[1]].nil?
-            true
+            return true
+        else
+          false
         end
-        false
     end
 
     def winning_combination?(piece)
