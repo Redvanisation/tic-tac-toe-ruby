@@ -1,5 +1,6 @@
 require_relative 'board'
 require_relative 'player'
+require_relative "./module.rb"
 
 class Game
   def initialize(player_1, player_2, board = Board.new)
@@ -12,26 +13,25 @@ class Game
     @current_player = @player_1;
   end
 
+  include Ask
   def play
 
       loop do
-           @board.render
+        @board.render
+            
+        coordinates
+        coords = gets.strip.split(",").map(&:to_i)
 
-           puts "#{@current_player.name}(#{@current_player.color}) please enter the coordinates in form: x, y:"
+        while(!@board.add_piece(coords, @current_player.color))
+            coordinates
+            coords = gets.strip.split(",").map(&:to_i)
+        end
 
-           coords = gets.strip.split(",").map(&:to_i)
+        @board.add_piece(coords, @current_player.color)
 
-           while(!@board.add_piece(coords, @current_player.color))
-             puts "#{@current_player.name}(#{@current_player.color}) please enter the coordinates in form: x, y:"
-
-             coords = gets.strip.split(",").map(&:to_i)
-           end
-
-           @board.add_piece(coords, @current_player.color)
-
-           break if check_game_over
-           switch_players
-       end
+        break if check_game_over
+        switch_players
+     end
   end
 
   def check_game_over
@@ -49,7 +49,7 @@ class Game
 
   def check_draw
       if @board.full?
-          puts "Bummer, you've drawn..."
+          puts "Ugh!, you've drawn..."
           true
       else
           false
