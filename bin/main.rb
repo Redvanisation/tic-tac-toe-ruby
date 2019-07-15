@@ -2,7 +2,7 @@ require_relative '../lib/game'
 require_relative '../lib/player'
 require_relative '../lib/board'
 
-puts "    Welcome to Tictactoe game   "
+puts "    Welcome to Tictactoe game    "
 
 player_1_name = ""
 player_2_name = ""
