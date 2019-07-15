@@ -1,3 +1,5 @@
+# require_relative '../bin/main.rb'
+
 class Player
     attr_accessor :name, :piece
 
@@ -23,11 +25,8 @@ class Player
     end
 
     #asking for coordinates
-    def coordinates
-        puts "#{@name}(#{@piece}) please enter the coordinates in form: x, y:"
-
-        gets.strip.split(",").map(&:to_i)
-    end
+    require_relative "./module.rb"
+    include Ask
 
     # validating the coordinates format
 
@@ -36,7 +35,6 @@ class Player
             true
         else
             puts "Invalid Coordinates"
-            false
         end
     end
 
