@@ -1,25 +1,37 @@
-require_relative './board'
-require_relative './player'
+require_relative 'board'
+require_relative 'player'
+require_relative "./module.rb"
 
 class Game
-  def initialize
-    @board = Board.new
+  def initialize(player_1, player_2, board = Board.new)
 
-    @player_x = Player.new('X', :x, @board)
-    @player_y = Player.new('Y', :y, @board)
+    @player_1 = player_1
+    @player_2 = player_2
 
-    @current_player = @player_x;
+    @board = board
+
+    @current_player = @player_1;
   end
 
+  include Ask
   def play
+
       loop do
-          @board.render
+        @board.render
+            
+        coordinates
+        coords = gets.strip.split(",").map(&:to_i)
 
-          @current_player.get_coords
+        while(!@board.add_piece(coords, @current_player.color))
+            coordinates
+            coords = gets.strip.split(",").map(&:to_i)
+        end
 
-          break if check_game_over
-          switch_players
-      end
+        @board.add_piece(coords, @current_player.color)
+
+        break if check_game_over
+        switch_players
+     end
   end
 
   def check_game_over
@@ -27,7 +39,7 @@ class Game
   end
 
   def check_victory
-      if @board.winning_combination?(@current_player.piece)
+      if @board.winning_combination?(@current_player.color)
           puts "Congratulations #{@current_player.name}, you win!"
           true
       else
@@ -37,7 +49,7 @@ class Game
 
   def check_draw
       if @board.full?
-          puts "Bummer, you've drawn..."
+          puts "Ugh!, you've drawn..."
           true
       else
           false
@@ -45,10 +57,6 @@ class Game
   end
 
   def switch_players
-      if @current_player == @player_x
-          @current_player = @player_y
-      else
-          @current_player = @player_x
-      end
+      @current_player = @current_player == @player_1 ? @player_2 : @player_1
   end
 end

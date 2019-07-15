@@ -1,17 +1,12 @@
 class Board
     def initialize
-        @board = Array.new(3){Array.new(3)}
+        @board = Array.new(3){Array.new(3, '')}
     end
 
     def render
-        puts
-        @board.each do |row|
-            row.each do |cell|
-                cell.nil? ? print("-") : print(cell.to_s)
-            end
-            puts
-        end
-        puts
+      @board.each do |row|
+        puts row.map { |cell| cell.empty? ? '_' : cell }.join(' ')
+      end
     end
 
     #adding piece
@@ -34,25 +29,15 @@ class Board
     end
 
     def valid_coords?(coords)
-        if (0..2).include?(coords[0]) && (0..2).include?(coords[1])
-          true
-        else
-          false
-        end
+      (0..2).include?(coords[0]) && (0..2).include?(coords[1]) ? true : false
     end
 
     def coords_available?(coords)
-        if @board[coords[0]][coords[1]].nil?
-            true
-        else
-            false
-        end
+        @board[coords[0]][coords[1]].empty? ? true : false
     end
 
     def winning_combination?(piece)
-        winning_diagonal?(piece)   ||
-        winning_horizontal?(piece) ||
-        winning_vertical?(piece)
+        winning_diagonal?(piece) || winning_horizontal?(piece) || winning_vertical?(piece)
     end
 
     def winning_diagonal?(piece)
@@ -91,7 +76,7 @@ class Board
 
     def full?
         @board.all? do |row|
-            row.none?(&:nil? )
+            row.none?(&:empty? )
         end
     end
 
