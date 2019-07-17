@@ -2,7 +2,18 @@ require_relative '../lib/game'
 require_relative '../lib/player'
 require_relative '../lib/board'
 
-puts "    Welcome to Tictactoe game    "
+puts
+puts
+puts "Welcome to Tictactoe game    "
+puts
+puts "The following is a table showing the slots numbers"
+puts
+puts "    *******************    "
+puts "      1      2      3      "
+puts "      4      5      6      "
+puts "      7      8      9      "
+puts "    *******************    "
+puts
 
 player_1_name = ""
 player_2_name = ""
