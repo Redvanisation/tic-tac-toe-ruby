@@ -14,17 +14,24 @@ class Game
   end
 
   include Ask
+
   def play
 
       loop do
         @board.render
             
         coordinates
-        coords = gets.strip.split(",").map(&:to_i)
+        coords_input = gets.chomp.to_i
+        if coords_input
+            coords = make_coords[coords_input]
+        end
 
         while(!@board.add_piece(coords, @current_player.color))
             coordinates
-            coords = gets.strip.split(",").map(&:to_i)
+            coords = gets.chomp.to_i
+            if (1..9).include?(coords_input)
+                coords = make_coords[coords_input]
+            end
         end
 
         @board.add_piece(coords, @current_player.color)
