@@ -21,11 +21,11 @@ ruby version should be >= 2.5.5
 - There is a 3X3 board with numbers inside each cell
 - First Player chooses the sign "X" or "O"
 - Second Player will have the remaining sign
-- Next step each player will choose two numbers in x, y format from 0 to 2 (x is the row, and y is the column) 
+- Next step each player will choose a numbers from 1 to 9
 - The board will be updated with "X" or "O" 
 - After each player takes his turn the board will have "X" or "O"
 - The first player who has 3 consecutive "X" or "O" will win otherwise it is draw
-- Players can only choose the numbers from the board (from 0 to 2 in any direction)
+- Players can only choose the numbers from the board (from 1 to 9)
 - Players cannot enter Alphabet or duplicate number from the board
 
 ## Authors

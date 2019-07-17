@@ -29,7 +29,11 @@ class Board
     end
 
     def valid_coords?(coords)
-      (0..2).include?(coords[0]) && (0..2).include?(coords[1]) ? true : false
+        if !coords
+            puts "Invalid input" 
+        else
+            (0..2).include?(coords[0]) && (0..2).include?(coords[1]) ? true : false
+        end
     end
 
     def coords_available?(coords)
@@ -37,22 +41,22 @@ class Board
     end
 
     def winning_combination?(piece)
-        winning_diagonal?(piece) || winning_horizontal?(piece) || winning_vertical?(piece)
+        check_diagonal?(piece) || check_horizontal?(piece) || check_vertical?(piece)
     end
 
-    def winning_diagonal?(piece)
+    def check_diagonal?(piece)
         diagonals.any? do |diag|
             diag.all?{|cell| cell == piece }
         end
     end
 
-    def winning_vertical?(piece)
+    def check_vertical?(piece)
         verticals.any? do |vert|
             vert.all?{|cell| cell == piece }
         end
     end
 
-    def winning_horizontal?(piece)
+    def check_horizontal?(piece)
         horizontals.any? do |horz|
             horz.all?{|cell| cell == piece }
         end
