@@ -27,9 +27,9 @@ class Game
         end
 
         while(!@board.add_piece(coords, @current_player.color))
-            coordinates
+            puts "coordinates already used!"
             coords = gets.chomp.to_i
-            if (1..9).include?(coords_input)
+            if coords_input
                 coords = make_coords[coords_input]
             end
         end

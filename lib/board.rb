@@ -41,24 +41,34 @@ class Board
     end
 
     def winning_combination?(piece)
+        # puts "piece: #{piece}"
         check_diagonal?(piece) || check_horizontal?(piece) || check_vertical?(piece)
     end
 
     def check_diagonal?(piece)
         diagonals.any? do |diag|
-            diag.all?{|cell| cell == piece }
+            diag.all? do |cell| 
+                puts "piece: #{piece}" 
+                cell == piece 
+            end
         end
     end
 
     def check_vertical?(piece)
         verticals.any? do |vert|
-            vert.all?{|cell| cell == piece }
+            vert.all? do |cell| 
+                # puts "piece: #{piece}" 
+                cell == piece 
+            end
         end
     end
 
     def check_horizontal?(piece)
         horizontals.any? do |horz|
-            horz.all?{|cell| cell == piece }
+            horz.all? do |cell| 
+                # puts "piece: #{piece}" 
+                cell == piece 
+            end
         end
     end
 
