@@ -1,9 +1,5 @@
 require "./lib/board"
 require "./lib/game"
-# require "./bin/main"
-
-# game = Game.new
-# game.play
 
 
 RSpec.describe Board do
@@ -72,6 +68,8 @@ RSpec.describe Board do
     describe "#winning_combination?" do
 
 
+    # True cases:
+
         it "Wins the game when the board reads X X X across the top row returns true" do
 
             allow(board).to receive(:check_horizontal?).and_return(true)
@@ -112,6 +110,32 @@ RSpec.describe Board do
             allow(board).to receive(:check_diagonal?).and_return(true)
 
             expect(board.winning_combination?(piece2)).to eq(true)
+        end
+
+
+        #False cases:
+
+        it "returns false if the horizontal row is not a color strike" do
+
+            allow(board).to receive(:check_horizontal?).and_return(false)
+
+            expect(board.winning_combination?(piece)).not_to eq(true)
+        end
+
+
+        it "returns false if the vertical row is not a color strike" do
+
+            allow(board).to receive(:check_vertical?).and_return(false)
+
+            expect(board.winning_combination?(piece)).not_to eq(true)
+        end
+
+
+        it "returns false if the diagonal row is not a color strike" do
+
+            allow(board).to receive(:check_diagonal?).and_return(false)
+
+            expect(board.winning_combination?(piece)).not_to eq(true)
         end
 
     end

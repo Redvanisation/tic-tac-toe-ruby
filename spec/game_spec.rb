@@ -19,6 +19,13 @@ RSpec.describe Game do
 
             expect(game.check_draw).to eq(true)
         end
+
+        it "returns false in case of the opposite" do
+            
+            allow(board).to receive(:full?).and_return(false)
+
+            expect(game.check_draw).not_to eq(true)
+        end
     end
 
     describe "#check_victory" do
