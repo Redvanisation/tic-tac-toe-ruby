@@ -1,6 +1,7 @@
 require "./lib/game"
 require "./lib/player"
 require "./lib/module"
+require "./lib/board"
 
 RSpec.describe Game do
 
@@ -10,6 +11,27 @@ RSpec.describe Game do
     let(:game) { Game.new(player1,player2,board) }
     let(:piece) { "x" }
     let(:piece2) { "o" }
+    let(:coords) { [0,0] }
+
+    describe "#play" do
+        let(:current_player) {player1}
+
+        it "takes user input and passes it to the other methods then switches players if check_game_over method is false" do
+            allow(board).to receive(:add_piece).and_return(current_player.color)
+            allow(game).to receive(:check_victory).and_return(false)
+
+            expect(game.check_game_over).to eq(false)
+            expect(game.switch_players).to eq(player2)
+        end
+
+        it "takes user input and passes it to the other methods then ends the game if check_game_over method (in case of a victory or a draw) is true" do
+            allow(board).to receive(:add_piece).and_return(current_player.color)
+            allow(game).to receive(:check_victory).and_return(true)
+
+            expect(game.check_game_over).not_to eq(false)
+        end
+    end 
+
 
     describe "#check_draw" do
 
