@@ -22,6 +22,7 @@ class Board
     # Checking if the piece coordinates are valid or not:
     def piece_location_valid?(coords)
         if valid_coords?(coords)
+            puts "Piece added at coordinates #{coords}"
             coords_available?(coords)
         else
           puts "Piece coordinates are out of bounds!"
