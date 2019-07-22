@@ -10,6 +10,21 @@ RSpec.describe Board do
     let(:piece) { "x" }
     let(:piece2) { "o" }
 
+
+    describe "#render" do
+        it "renders the game UI to the terminal" do
+            expect(board.render).not_to eq(nil)
+        end
+
+        it "Does not render the game UI to the terminal if the given array is incorrect" do
+            allow(board.render).to receive(:each).and_return(nil)
+            
+            expect(board.render).not_to eq(true)
+        end
+
+
+    end
+
     describe "#coords_available?" do
 
         it "returns true if the chosen coordinates location is available" do
