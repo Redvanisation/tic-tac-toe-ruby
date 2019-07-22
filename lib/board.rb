@@ -25,6 +25,7 @@ class Board
             coords_available?(coords)
         else
           puts "Piece coordinates are out of bounds!"
+          false
         end
     end
 
@@ -41,14 +42,12 @@ class Board
     end
 
     def winning_combination?(piece)
-        # puts "piece: #{piece}"
         check_diagonal?(piece) || check_horizontal?(piece) || check_vertical?(piece)
     end
 
     def check_diagonal?(piece)
         diagonals.any? do |diag|
-            diag.all? do |cell| 
-                puts "piece: #{piece}" 
+            diag.all? do |cell|
                 cell == piece 
             end
         end
@@ -56,8 +55,7 @@ class Board
 
     def check_vertical?(piece)
         verticals.any? do |vert|
-            vert.all? do |cell| 
-                # puts "piece: #{piece}" 
+            vert.all? do |cell|
                 cell == piece 
             end
         end
@@ -65,9 +63,8 @@ class Board
 
     def check_horizontal?(piece)
         horizontals.any? do |horz|
-            horz.all? do |cell| 
-                # puts "piece: #{piece}" 
-                cell == piece 
+            horz.all? do |cell|
+                cell == piece
             end
         end
     end
