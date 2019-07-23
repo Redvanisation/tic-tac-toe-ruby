@@ -22,9 +22,11 @@ class Board
     # Checking if the piece coordinates are valid or not:
     def piece_location_valid?(coords)
         if valid_coords?(coords)
+            puts "Piece added at coordinates #{coords}"
             coords_available?(coords)
         else
           puts "Piece coordinates are out of bounds!"
+          false
         end
     end
 
@@ -46,19 +48,25 @@ class Board
 
     def check_diagonal?(piece)
         diagonals.any? do |diag|
-            diag.all?{|cell| cell == piece }
+            diag.all? do |cell|
+                cell == piece 
+            end
         end
     end
 
     def check_vertical?(piece)
         verticals.any? do |vert|
-            vert.all?{|cell| cell == piece }
+            vert.all? do |cell|
+                cell == piece 
+            end
         end
     end
 
     def check_horizontal?(piece)
         horizontals.any? do |horz|
-            horz.all?{|cell| cell == piece }
+            horz.all? do |cell|
+                cell == piece
+            end
         end
     end
 
